@@ -71,6 +71,7 @@ stages:
         failOnIssues: false
         projectName: '$(Build.Repository.Name)'
         organization: 'codigoartesano'
+        
     # - task: Maven@4
     #   inputs:
     #     mavenPomFile: 'pom.xml'
