@@ -80,7 +80,7 @@ stages:
         failOnIssues: false
         projectName: '$(Build.Repository.Name)'
         organization: 'codigoartesano'
-                
+      displayName: 'SCA'          
     # - task: Maven@4
     #   inputs:
     #     mavenPomFile: 'pom.xml'
