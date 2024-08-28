@@ -71,7 +71,16 @@ stages:
         failOnIssues: false
         projectName: '$(Build.Repository.Name)'
         organization: 'codigoartesano'
-        
+
+    - task: SnykSecurityScan@1
+      inputs:
+        serviceConnectionEndpoint: 'sc_snyk_sca'
+        testType: 'app'
+        codeSeverityThreshold: 'medium'
+        failOnIssues: false
+        projectName: '$(Build.Repository.Name)'
+        organization: 'codigoartesano'
+                
     # - task: Maven@4
     #   inputs:
     #     mavenPomFile: 'pom.xml'
