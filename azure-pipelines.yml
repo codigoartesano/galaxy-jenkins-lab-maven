@@ -31,6 +31,25 @@ stages:
         effectivePomSkip: false
         sonarQubeRunAnalysis: false
       displayName: Contruyendo Artefacto
+    - task: SnykSecurityScan@1
+      inputs:
+        serviceConnectionEndpoint: 'sc_snyk_sca'
+        testType: 'code'
+        codeSeverityThreshold: 'medium'
+        failOnIssues: false
+        projectName: '$(Build.Repository.Name)'
+        organization: 'codigoartesano'
+      displayName: 'CODE - Snyk'
+
+    - task: SnykSecurityScan@1
+      inputs:
+        serviceConnectionEndpoint: 'sc_snyk_sca'
+        testType: 'app'
+        codeSeverityThreshold: 'medium'
+        failOnIssues: false
+        projectName: '$(Build.Repository.Name)'
+        organization: 'codigoartesano'
+      displayName: 'SCA - Snyk'  
     - task: SonarQubePrepare@6
       inputs:
         SonarQube: 'sc_sonarqube_prd'
@@ -63,24 +82,7 @@ stages:
     - task: SonarQubePublish@6
       inputs:
         pollingTimeoutSec: '300'
-    - task: SnykSecurityScan@1
-      inputs:
-        serviceConnectionEndpoint: 'sc_snyk_sca'
-        testType: 'code'
-        codeSeverityThreshold: 'medium'
-        failOnIssues: false
-        projectName: '$(Build.Repository.Name)'
-        organization: 'codigoartesano'
-
-    - task: SnykSecurityScan@1
-      inputs:
-        serviceConnectionEndpoint: 'sc_snyk_sca'
-        testType: 'app'
-        codeSeverityThreshold: 'medium'
-        failOnIssues: false
-        projectName: '$(Build.Repository.Name)'
-        organization: 'codigoartesano'
-      displayName: 'SCA'          
+        
     # - task: Maven@4
     #   inputs:
     #     mavenPomFile: 'pom.xml'
